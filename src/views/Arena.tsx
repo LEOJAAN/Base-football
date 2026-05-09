@@ -18,7 +18,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const [role, setRole] = useState<Role>('striker');
   const [playerScore, setPlayerScore] = useState<number>(0);
   const [aiScore, setAiScore] = useState<number>(0);
-  const [shotHistory, setShotHistory] = useState<('scored' | 'missed' | null)[]>(new Array(5).fill(null));
+  const [shotHistory, setShotHistory] = useState<('scored' | 'missed' | null)[]>(new Array(3).fill(null));
   const [crowdState, setCrowdState] = useState<'idle' | 'cheer' | 'slump'>('idle');
   
   const [matchState, setMatchState] = useState<MatchState>('playing');
@@ -100,8 +100,8 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       }
     }
 
-    // Update shot history for the first 5 rounds (UI limit)
-    if (round <= 5) {
+    // Update shot history for the first 3 rounds (UI limit)
+    if (round <= 3) {
       const newHistory = [...shotHistory];
       newHistory[round - 1] = success ? 'scored' : 'missed';
       setShotHistory(newHistory);
@@ -123,7 +123,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       setRole('goalkeeper');
       setMatchState('playing');
     } else {
-      if (round >= 5) { // Played 5 rounds as per the scoreboard UI
+      if (round >= 3) { // Played 3 rounds as per the scoreboard UI
         setMatchState('game_over');
       } else {
         setRole('striker');
