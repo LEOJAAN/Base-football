@@ -1,0 +1,47 @@
+[36mvite v8.0.11 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 2336 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                         0.61 kB │ gzip:   0.34 kB
+dist/assets/index-C0yrhLfj.css          4.12 kB │ gzip:   1.44 kB
+dist/assets/connectors-DKYzhjS0.js      0.13 kB │ gzip:   0.13 kB
+dist/assets/connectors-CRodjgNP.js      0.14 kB │ gzip:   0.14 kB
+dist/assets/ccip-DbAVClB7.js            2.71 kB │ gzip:   1.26 kB
+dist/assets/utils-B0Fw2xa_.js           6.78 kB │ gzip:   2.52 kB
+dist/assets/w3m-modal-BDZBAXzC.js       7.03 kB │ gzip:   2.48 kB
+dist/assets/exports-K1vTmE31.js        10.51 kB │ gzip:   3.94 kB
+dist/assets/secp256k1-DMFWGWXA.js      28.16 kB │ gzip:  11.31 kB
+dist/assets/esm-0u2klHYR.js           590.47 kB │ gzip: 155.10 kB
+dist/assets/index-E2uBCIrk.js       1,156.91 kB │ gzip: 347.73 kB
+
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[31m✗[39m Build failed in 635ms
+[31merror during build:
+[31mBuild failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "@walletconnect/ethereum-provider" from "D:/base football/node_modules/@web3modal/base/dist/esm/adapters/evm/wagmi/client.js".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`
+    at viteLog (file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33126:57)
+    at file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33162:71
+    at onwarn (file:///D:/base%20football/node_modules/@vitejs/plugin-react/dist/index.js:40:7)
+    at file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33162:28
+    at onRollupLog (file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33157:63)
+    at onLog (file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:32926:4)
+    at file:///D:/base%20football/node_modules/rolldown/dist/shared/rolldown-build-CorVA9v1.mjs:50:26
+    at logger (file:///D:/base%20football/node_modules/rolldown/dist/shared/rolldown-build-CorVA9v1.mjs:41:3)
+    at onLog (file:///D:/base%20football/node_modules/rolldown/dist/shared/bindingify-input-options-DQ2Xw70P.mjs:1991:32)[31m
+    at aggregateBindingErrorsIntoJsError (file:///D:/base%20football/node_modules/rolldown/dist/shared/error-D4ASW9r2.mjs:48:18)
+    at unwrapBindingResult (file:///D:/base%20football/node_modules/rolldown/dist/shared/error-D4ASW9r2.mjs:18:128)
+    at #build (file:///D:/base%20football/node_modules/rolldown/dist/shared/rolldown-build-CorVA9v1.mjs:3255:34)
+    at async buildEnvironment (file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33033:64)
+    at async Object.build (file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33455:19)
+    at async Object.buildApp (file:///D:/base%20football/node_modules/vite/dist/node/chunks/node.js:33452:153)
+    at async CAC.<anonymous> (file:///D:/base%20football/node_modules/vite/dist/node/cli.js:778:3) {
+  errors: [Getter/Setter]
+}[39m

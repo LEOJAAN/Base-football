@@ -1,0 +1,37 @@
+import { useSendTransaction, useWaitForTransactionReceipt, useAccount } from 'wagmi';
+import { parseEther } from 'viem';
+
+export const BUILDER_CODE = 'bc_md0xlpyq';
+export const ENCODED_BUILDER_STRING = '0x62635f6d6430786c7079710b0080218021802180218021802180218021';
+export const DEAD_ADDRESS = '0x0000000000000000000000000000000000000000';
+
+export function useBaseTransaction() {
+  const { data: hash, isPending, sendTransaction, error } = useSendTransaction();
+  const { address } = useAccount();
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = 
+    useWaitForTransactionReceipt({
+      hash,
+    });
+
+  const sendActivityTransaction = async () => {
+    if (!address) throw new Error("Wallet not connected");
+    
+    // We send a 0 ETH transaction to the dead address
+    // with the encoded builder string in the data field to track activity
+    sendTransaction({
+      to: DEAD_ADDRESS,
+      value: parseEther('0'),
+      data: ENCODED_BUILDER_STRING as `0x${string}`,
+    });
+  };
+
+  return {
+    sendActivityTransaction,
+    isPending,
+    isConfirming,
+    isConfirmed,
+    error,
+    hash
+  };
+}

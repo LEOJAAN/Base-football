@@ -1,0 +1,141 @@
+.team-selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header-section h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.header-section p {
+  color: #8892b0;
+  font-size: 1.1rem;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 3rem;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 2px solid var(--glass-border);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.team-card.selected {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.team-logo-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.team-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.team-desc {
+  font-size: 0.9rem;
+  color: #ccd6f6;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.kit-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding: 10px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.kit-preview::before {
+  content: 'TEAM KIT';
+  font-size: 0.7rem;
+  color: #8892b0;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.kit-shirt {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px 8px 4px 4px;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 100%, 0% 100%, 0% 20%);
+}
+
+.kit-shorts {
+  width: 36px;
+  height: 20px;
+  border-radius: 4px 4px 8px 8px;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.confirm-team-btn {
+  font-size: 1.2rem;
+  padding: 16px 48px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .header-section h2 {
+    font-size: 2rem;
+  }
+  .teams-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
