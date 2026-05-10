@@ -8,7 +8,8 @@ import './Arena.css';
 type Direction = 'left' | 'center' | 'right';
 type Role = 'striker' | 'goalkeeper';
 type MatchState = 'playing' | 'round_result' | 'game_over';
-type StrikerState = 'idle' | 'running' | 'kicking';
+type StrikerState = 'idle' | 'running' | 'kicking' | 'exit';
+type KeeperReaction = 'idle' | 'catch' | 'missed';
 
 interface ArenaProps {
   selectedTeam: Team;
@@ -35,6 +36,23 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const [floatingFeedback, setFloatingFeedback] = useState<{ text: string; type: 'success' | 'danger' | 'info' } | null>(null);
   const [isShaking, setIsShaking] = useState(false);
 
+  const [isNetShaking, setIsNetShaking] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [keeperReaction, setKeeperReaction] = useState<KeeperReaction>('idle');
+  
+  // Character mapping based on protocol
+  const getCharacters = () => {
+    switch(selectedTeam.id) {
+      case 'aerodrome': return { striker: 'Messi', keeper: 'Donnarumma', kit: '#0052FF', skin: '#fbbf24' };
+      case 'aave': return { striker: 'Neymar', keeper: 'Courtois', kit: '#B6509E', skin: '#8d5524' };
+      case 'across': return { striker: 'Ronaldo', keeper: 'Sommer', kit: '#00223A', skin: '#f1c27d' };
+      case '0xsplits': return { striker: 'Mbappé', keeper: 'Raya', kit: '#00C48C', skin: '#e0ac69' };
+      default: return { striker: 'Striker', keeper: 'Keeper', kit: '#3b82f6', skin: '#fbbf24' };
+    }
+  };
+
+  const characters = getCharacters();
+
   // New animation states
   const [strikerState, setStrikerState] = useState<StrikerState>('idle');
   const [isAnimating, setIsAnimating] = useState(false);
@@ -49,7 +67,6 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
         setShowTurnOverlay(false);
         if (!isPlayerTurn) {
           setIsBotThinking(true);
-          // Bot logic for choosing direction when it's the bot's turn to shoot
           setTimeout(() => {
             setIsBotThinking(false);
           }, 1200);
@@ -79,65 +96,79 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     let success = false;
 
     if (role === 'striker') {
-      // 1. Start Running
       setStrikerState('running');
-      // Wait for run to almost complete
       await new Promise(resolve => setTimeout(resolve, 750));
 
-      // 2. Impact Frame (Kick) - Perfectly Synced
       setStrikerState('kicking');
+      setIsZoomed(true);
       setBallPos(direction);
       setKeeperPos(aiChoice);
-      showFeedback('BOOM! ⚽', 'info');
+      
+      // Sync striker exit
+      setTimeout(() => setStrikerState('exit'), 200);
 
-      if (direction !== aiChoice) {
-        success = true;
-      }
-    } else {
-      // Bot is striker
-      setIsBotThinking(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setIsBotThinking(false);
-
-      setKeeperPos(direction);
-      setBallPos(aiChoice);
-      showFeedback('INCOMING!', 'danger');
-
-      if (direction !== aiChoice) {
+      if (direction === aiChoice) {
         success = false;
+        setKeeperReaction('catch');
+        showFeedback('MASTER SAVED! 🧤', 'danger');
       } else {
         success = true;
+        setKeeperReaction('missed');
+        showFeedback(`${characters.striker.toUpperCase()} SCORES! ⚽`, 'info');
+      }
+    } else {
+      setIsBotThinking(true);
+      await new Promise(resolve => setTimeout(resolve, 800));
+      setIsBotThinking(false);
+
+      setStrikerState('running');
+      await new Promise(resolve => setTimeout(resolve, 750));
+      setStrikerState('kicking');
+      setIsZoomed(true);
+      
+      setKeeperPos(direction);
+      setBallPos(aiChoice);
+      
+      setTimeout(() => setStrikerState('exit'), 200);
+
+      if (direction === aiChoice) {
+        success = true;
+        setKeeperReaction('catch');
+        showFeedback('HUGE SAVE! 🧤', 'success');
+      } else {
+        success = false;
+        setKeeperReaction('missed');
+        showFeedback(`${characters.striker.toUpperCase()} BLASTS IT!`, 'danger');
       }
     }
 
-    // Wait for ball to reach goal
-    await new Promise(resolve => setTimeout(resolve, 800));
+    // High velocity ball reach
+    await new Promise(resolve => setTimeout(resolve, 600));
 
-    if (role === 'striker') {
-      if (success) {
+    if (success) {
+      setIsNetShaking(true);
+      setTimeout(() => setIsNetShaking(false), 800);
+      
+      if (role === 'striker') {
         setPlayerScore(prev => prev + 1);
         setLastResult('GOAL!');
         setCrowdState('cheer');
         triggerShake();
       } else {
-        setLastResult('SAVED!');
-        setCrowdState('slump');
-        showFeedback('DENIED!', 'danger');
-      }
-    } else {
-      if (!success) {
         setAiScore(prev => prev + 1);
         setLastResult('SCORED!');
         setCrowdState('slump');
         triggerShake();
+      }
+    } else {
+      setLastResult('SAVED!');
+      if (role === 'striker') {
+        setCrowdState('slump');
       } else {
-        setLastResult('SAVED!');
         setCrowdState('cheer');
-        showFeedback('MASTERCLASS!', 'success');
       }
     }
 
-    // Update shot history
     if (round <= 3) {
       const newHistory = [...shotHistory];
       newHistory[round - 1] = success ? 'scored' : 'missed';
@@ -156,6 +187,8 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     setBallPos('center');
     setKeeperPos('center');
     setStrikerState('idle');
+    setKeeperReaction('idle');
+    setIsZoomed(false);
     setCrowdState('idle');
     
     if (role === 'striker') {
@@ -176,11 +209,17 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const isDraw = playerScore === aiScore;
 
   // Animation Variants
+  const cameraVariants: Variants = {
+    idle: { scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    zoomed: { scale: 1.4, y: 150, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } }
+  };
+
   const strikerVariants: Variants = {
     idle: { 
-      y: 0, 
-      x: '-50%', 
-      scale: 1, 
+      y: 10, 
+      x: '-100%', 
+      scale: 1.1, 
+      rotate: 15,
       opacity: 1,
       transition: { duration: 0.3 }
     },
@@ -188,6 +227,8 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       y: -155, 
       x: '-50%', 
       scale: 0.55,
+      rotate: 0,
+      opacity: 1,
       transition: { 
         duration: 0.8, 
         ease: [0.4, 0, 0.2, 1] 
@@ -197,7 +238,15 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       y: -155,
       x: '-50%',
       scale: 0.55,
+      rotate: 0,
+      opacity: 1,
       transition: { duration: 0.1 } 
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.3,
+      y: -180,
+      transition: { duration: 0.4 }
     }
   };
 
@@ -208,14 +257,14 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       y: 60, 
       rotate: -95, 
       scale: 0.85,
-      transition: { type: "spring", stiffness: 150, damping: 15 }
+      transition: { type: "spring", stiffness: 180, damping: 15 }
     },
     right: { 
       x: '120%', 
       y: 60, 
       rotate: 95, 
       scale: 0.85,
-      transition: { type: "spring", stiffness: 150, damping: 15 }
+      transition: { type: "spring", stiffness: 180, damping: 15 }
     }
   };
 
@@ -224,23 +273,23 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     left: { 
       bottom: '68%', 
       left: '25%', 
-      scale: 0.35, 
-      rotate: 1080,
-      transition: { duration: 0.6, ease: "easeOut" } 
+      scale: 0.25, 
+      rotate: 1440,
+      transition: { duration: 0.5, ease: "easeOut" } 
     },
     right: { 
       bottom: '68%', 
       left: '75%', 
-      scale: 0.35, 
-      rotate: -1080,
-      transition: { duration: 0.6, ease: "easeOut" } 
+      scale: 0.25, 
+      rotate: -1440,
+      transition: { duration: 0.5, ease: "easeOut" } 
     },
     'center-goal': { 
       bottom: '68%', 
       left: '50%', 
-      scale: 0.35, 
-      rotate: 720,
-      transition: { duration: 0.6, ease: "easeOut" } 
+      scale: 0.25, 
+      rotate: 1080,
+      transition: { duration: 0.5, ease: "easeOut" } 
     }
   };
 
@@ -278,20 +327,20 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
         <div className="score-board">
           <div className="turn-indicators">
             <div className={`indicator player ${matchState === 'playing' && role === 'striker' && !isBotThinking ? 'active pulse' : ''}`}>
-               YOUR TURN
+               {username.toUpperCase()}
             </div>
             <div className={`indicator bot ${matchState === 'playing' && (role === 'goalkeeper' || isBotThinking) ? 'active pulse' : ''}`}>
-               BOT'S TURN
+               {characters.keeper.toUpperCase()}
             </div>
           </div>
           <div className="score-main">
-            <div className="score-team">{username.toUpperCase() || 'BASED STRIKER'}</div>
+            <div className="score-team">{characters.striker.toUpperCase()}</div>
             <div className="score-center">
               <span>{playerScore}</span>
               <span>:</span>
               <span>{aiScore}</span>
             </div>
-            <div className="score-team">BOT</div>
+            <div className="score-team">KEEPER</div>
           </div>
           <div className="score-history">
             <div className="history-set">
@@ -305,90 +354,103 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
         <div className="status-label-container">
           <div className="status-label animate-fade-in">
             {role === 'striker' ? (
-              <span className="text-striker">YOUR TURN: Choose where to shoot! ⚽</span>
+              <span className="text-striker">Goal focus active. Take your shot, {characters.striker}! ⚽</span>
             ) : (
-              <span className="text-keeper">WATCH OUT: Guess where the bot will kick! 🧤</span>
+              <span className="text-keeper">Watch the approach! Defend with {characters.keeper}! 🧤</span>
             )}
           </div>
         </div>
       </div>
 
-      <div className="pitch">
-        <div className="goal-post">
-          <div className="net"></div>
-        </div>
-        
-        <motion.div 
-          className="keeper"
-          variants={keeperVariants}
-          animate={keeperPos === 'center' ? 'center' : keeperPos}
-          initial="center"
-        >
-           <div className="keeper-character">
-              <svg viewBox="0 0 100 120" className="keeper-svg">
-                {/* Body */}
-                <rect x="25" y="40" width="50" height="60" rx="10" fill="#f97316" stroke="#000" strokeWidth="2" />
-                {/* Head */}
-                <circle cx="50" cy="25" r="15" fill="#fb923c" stroke="#000" strokeWidth="2" />
-                {/* Gloves */}
-                <rect x="10" y="50" width="15" height="20" rx="4" fill="#fff" stroke="#000" strokeWidth="2" />
-                <rect x="75" y="50" width="15" height="20" rx="4" fill="#fff" stroke="#000" strokeWidth="2" />
-                {/* Shorts */}
-                <rect x="25" y="85" width="50" height="15" fill="#000" />
-              </svg>
-           </div>
-        </motion.div>
-        
-        <motion.div 
-          className={`ball ${role === 'striker' ? 'ball-user' : 'ball-bot'}`}
-          variants={ballVariants}
-          animate={ballPos === 'center' ? (matchState === 'playing' ? 'center' : 'center-goal') : ballPos}
-          initial="center"
-        >
-          <div className="ball-trail"></div>
-        </motion.div>
-
-        <AnimatePresence>
-          {floatingFeedback && (
-            <motion.div 
-              initial={{ opacity: 0, y: 0, x: '-50%' }}
-              animate={{ opacity: 1, y: -100, x: '-50%' }}
-              exit={{ opacity: 0 }}
-              className={`floating-feedback feedback-${floatingFeedback.type}`}
-            >
-              {floatingFeedback.text}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {role === 'striker' && (
+      <motion.div 
+        className="pitch-camera-wrapper"
+        variants={cameraVariants}
+        animate={isZoomed ? 'zoomed' : 'idle'}
+        initial="idle"
+      >
+        <div className="pitch">
+          <div className={`goal-post ${isNetShaking ? 'net-shaking' : ''}`}>
+            <div className="net"></div>
+          </div>
+          
           <motion.div 
-            className={`striker-foreground ${strikerState}`}
-            variants={strikerVariants}
-            animate={strikerState}
-            initial="idle"
+            className="keeper"
+            variants={keeperVariants}
+            animate={keeperPos === 'center' ? 'center' : keeperPos}
+            initial="center"
           >
-             <div className="striker-character">
-                <svg viewBox="0 0 100 150" className="striker-svg">
-                  {/* Legs */}
-                  <g className="striker-legs">
-                    <rect x="30" y="100" width="15" height="40" fill="#222" className="leg-left" />
-                    <rect x="55" y="100" width="15" height="40" fill="#222" className="leg-right" />
+             <div className={`keeper-character reaction-${keeperReaction}`}>
+                <svg viewBox="0 0 100 120" className="keeper-svg">
+                  <rect x="25" y="40" width="50" height="60" rx="10" fill={characters.kit} stroke="#000" strokeWidth="2" />
+                  <circle cx="50" cy="25" r="15" fill={characters.skin} stroke="#000" strokeWidth="2" />
+                  
+                  {/* Adaptive Arms based on reaction */}
+                  <g className="keeper-arms">
+                    <rect x="10" y="50" width="15" height="20" rx="4" fill="#fff" stroke="#000" strokeWidth="2" className="arm-left" />
+                    <rect x="75" y="50" width="15" height="20" rx="4" fill="#fff" stroke="#000" strokeWidth="2" className="arm-right" />
                   </g>
-                  {/* Body */}
-                  <rect x="20" y="40" width="60" height="70" rx="12" fill="var(--team-color)" stroke="#000" strokeWidth="2" />
-                  {/* Head */}
-                  <circle cx="50" cy="25" r="18" fill="#fbbf24" stroke="#000" strokeWidth="2" />
-                  {/* Arms */}
-                  <rect x="5" y="50" width="15" height="40" rx="5" fill="var(--team-color)" stroke="#000" strokeWidth="1" className="arm-left" />
-                  <rect x="80" y="50" width="15" height="40" rx="5" fill="var(--team-color)" stroke="#000" strokeWidth="1" className="arm-right" />
-                  {/* Number 9 */}
-                  <text x="50" y="85" textAnchor="middle" fill="#fff" fontSize="35" fontWeight="900">9</text>
+                  
+                  <rect x="25" y="85" width="50" height="15" fill="#000" />
                 </svg>
+                <div className="keeper-name-label">{characters.keeper}</div>
              </div>
           </motion.div>
-        )}
-      </div>
+          
+          <motion.div 
+            className={`ball ${role === 'striker' ? 'ball-user' : 'ball-bot'}`}
+            variants={ballVariants}
+            animate={ballPos === 'center' ? (matchState === 'playing' ? 'center' : 'center-goal') : ballPos}
+            initial="center"
+          >
+            <div className="base-logo-ball">
+              <svg viewBox="0 0 100 100" className="base-ball-svg">
+                <circle cx="50" cy="50" r="45" fill="#0052FF" />
+                <circle cx="50" cy="50" r="25" fill="#fff" />
+              </svg>
+            </div>
+            <div className="ball-trail"></div>
+          </motion.div>
+
+          <AnimatePresence>
+            {floatingFeedback && (
+              <motion.div 
+                initial={{ opacity: 0, y: 0, x: '-50%' }}
+                animate={{ opacity: 1, y: -100, x: '-50%' }}
+                exit={{ opacity: 0 }}
+                className={`floating-feedback feedback-${floatingFeedback.type}`}
+              >
+                {floatingFeedback.text}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {(role === 'striker' || matchState === 'playing') && (
+            <motion.div 
+              className={`striker-foreground ${strikerState}`}
+              variants={strikerVariants}
+              animate={strikerState}
+              initial="idle"
+            >
+               <div className="striker-character">
+                  <svg viewBox="0 0 100 150" className="striker-svg">
+                    <g className="striker-legs">
+                      <rect x="30" y="100" width="15" height="40" fill={characters.skin} className="leg-left" />
+                      <rect x="55" y="100" width="15" height="40" fill={characters.skin} className="leg-right" />
+                    </g>
+                    <rect x="20" y="40" width="60" height="70" rx="12" fill={characters.kit} stroke="#000" strokeWidth="2" />
+                    <circle cx="50" cy="25" r="18" fill={characters.skin} stroke="#000" strokeWidth="2" />
+                    <rect x="5" y="50" width="15" height="40" rx="5" fill={characters.kit} stroke="#000" strokeWidth="1" className="arm-left" />
+                    <rect x="80" y="50" width="15" height="40" rx="5" fill={characters.kit} stroke="#000" strokeWidth="1" className="arm-right" />
+                    <text x="50" y="85" textAnchor="middle" fill="#fff" fontSize="30" fontWeight="900" style={{ textShadow: '1px 1px 0 #000' }}>
+                      {characters.striker === 'Ronaldo' ? '7' : '10'}
+                    </text>
+                  </svg>
+                  <div className="striker-name-label">{characters.striker}</div>
+               </div>
+            </motion.div>
+          )}
+        </div>
+      </motion.div>
 
       {matchState === 'playing' && (
         <div className={`controls ${isBotThinking || isAnimating ? 'disabled' : ''}`}>

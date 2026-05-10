@@ -295,6 +295,18 @@
 }
 
 /* --- CHARACTERS --- */
+.pitch-camera-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+}
+
 /* Keeper */
 .keeper {
   position: absolute;
@@ -367,6 +379,19 @@
   0% { transform: rotate(0); }
   50% { transform: rotate(-45deg); }
   100% { transform: rotate(20deg); }
+}
+
+/* Keeper Reactions */
+.keeper-character.reaction-catch .arm-left {
+  transform: rotate(45deg) translate(10px, -10px);
+}
+.keeper-character.reaction-catch .arm-right {
+  transform: rotate(-45deg) translate(-10px, -10px);
+}
+
+.keeper-character.reaction-missed .keeper-svg {
+  filter: grayscale(0.5) contrast(0.8);
+  transform: scaleY(0.9);
 }
 
 /* Keeper Styling */
@@ -726,6 +751,56 @@
   20%, 80% { transform: translate3d(2px, 0, 0); }
   30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
   40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Character Labels */
+.striker-name-label, .keeper-name-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 20;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.striker-name-label { bottom: -25px; }
+.keeper-name-label { top: -30px; }
+
+/* Base Logo Ball */
+.base-logo-ball {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 15px #0052FF;
+}
+
+.base-ball-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ball {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Net Shaking Animation */
+.net-shaking .net {
+  animation: netShake 0.4s infinite alternate;
+}
+
+@keyframes netShake {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.05) translateY(-5px) skewX(2deg); }
+  100% { transform: scale(1) translateY(0); }
 }
 
 @media (max-width: 768px) {
