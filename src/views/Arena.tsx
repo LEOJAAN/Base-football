@@ -81,13 +81,14 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     if (role === 'striker') {
       // 1. Start Running
       setStrikerState('running');
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // Wait for run to almost complete
+      await new Promise(resolve => setTimeout(resolve, 750));
 
-      // 2. Impact Frame (Kick)
+      // 2. Impact Frame (Kick) - Perfectly Synced
       setStrikerState('kicking');
       setBallPos(direction);
       setKeeperPos(aiChoice);
-      showFeedback('POW! ⚽', 'info');
+      showFeedback('BOOM! ⚽', 'info');
 
       if (direction !== aiChoice) {
         success = true;
@@ -100,13 +101,11 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
       setKeeperPos(direction);
       setBallPos(aiChoice);
-      showFeedback('WATCH OUT!', 'danger');
+      showFeedback('INCOMING!', 'danger');
 
       if (direction !== aiChoice) {
-        // AI scored
         success = false;
       } else {
-        // Player saved
         success = true;
       }
     }
@@ -178,62 +177,70 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   // Animation Variants
   const strikerVariants: Variants = {
-    idle: { y: 0, x: '-50%', scale: 1, opacity: 1 },
-    running: { 
-      y: -150, 
+    idle: { 
+      y: 0, 
       x: '-50%', 
-      scale: 0.8,
-      transition: { duration: 0.8, ease: "easeIn" }
+      scale: 1, 
+      opacity: 1,
+      transition: { duration: 0.3 }
+    },
+    running: { 
+      y: -155, 
+      x: '-50%', 
+      scale: 0.55,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.4, 0, 0.2, 1] 
+      }
     },
     kicking: { 
-      scale: 0.9, 
-      rotate: -15,
-      y: -160,
-      x: '-55%',
-      transition: { duration: 0.2 } 
+      y: -155,
+      x: '-50%',
+      scale: 0.55,
+      transition: { duration: 0.1 } 
     }
   };
 
   const keeperVariants: Variants = {
     center: { x: '-50%', y: 0, rotate: 0, scale: 1 },
     left: { 
-      x: '-180%', 
-      y: 40, 
-      rotate: -75, 
-      scale: 0.9,
-      transition: { type: "spring", stiffness: 120, damping: 12 }
+      x: '-220%', 
+      y: 60, 
+      rotate: -95, 
+      scale: 0.85,
+      transition: { type: "spring", stiffness: 150, damping: 15 }
     },
     right: { 
-      x: '80%', 
-      y: 40, 
-      rotate: 75, 
-      scale: 0.9,
-      transition: { type: "spring", stiffness: 120, damping: 12 }
+      x: '120%', 
+      y: 60, 
+      rotate: 95, 
+      scale: 0.85,
+      transition: { type: "spring", stiffness: 150, damping: 15 }
     }
   };
 
   const ballVariants: Variants = {
     center: { bottom: '25%', left: '50%', scale: 1, rotate: 0 },
     left: { 
-      bottom: '65%', 
+      bottom: '68%', 
       left: '25%', 
-      scale: 0.4, 
-      rotate: 720,
-      transition: { duration: 0.7, ease: "easeOut" } 
+      scale: 0.35, 
+      rotate: 1080,
+      transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
-      bottom: '65%', 
+      bottom: '68%', 
       left: '75%', 
-      scale: 0.4, 
-      rotate: -720,
-      transition: { duration: 0.7, ease: "easeOut" } 
+      scale: 0.35, 
+      rotate: -1080,
+      transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '65%', 
+      bottom: '68%', 
       left: '50%', 
-      scale: 0.4, 
-      rotate: 360,
-      transition: { duration: 0.7, ease: "easeOut" } 
+      scale: 0.35, 
+      rotate: 720,
+      transition: { duration: 0.6, ease: "easeOut" } 
     }
   };
 
@@ -317,7 +324,19 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
           animate={keeperPos === 'center' ? 'center' : keeperPos}
           initial="center"
         >
-           <div className="keeper-body"></div>
+           <div className="keeper-character">
+              <svg viewBox="0 0 100 120" className="keeper-svg">
+                {/* Body */}
+                <rect x="25" y="40" width="50" height="60" rx="10" fill="#f97316" stroke="#000" strokeWidth="2" />
+                {/* Head */}
+                <circle cx="50" cy="25" r="15" fill="#fb923c" stroke="#000" strokeWidth="2" />
+                {/* Gloves */}
+                <rect x="10" y="50" width="15" height="20" rx="4" fill="#fff" stroke="#000" strokeWidth="2" />
+                <rect x="75" y="50" width="15" height="20" rx="4" fill="#fff" stroke="#000" strokeWidth="2" />
+                {/* Shorts */}
+                <rect x="25" y="85" width="50" height="15" fill="#000" />
+              </svg>
+           </div>
         </motion.div>
         
         <motion.div 
@@ -344,13 +363,28 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
         {role === 'striker' && (
           <motion.div 
-            className="striker-foreground"
+            className={`striker-foreground ${strikerState}`}
             variants={strikerVariants}
             animate={strikerState}
             initial="idle"
           >
-             <div className="striker-body">
-                <span className="striker-number">9</span>
+             <div className="striker-character">
+                <svg viewBox="0 0 100 150" className="striker-svg">
+                  {/* Legs */}
+                  <g className="striker-legs">
+                    <rect x="30" y="100" width="15" height="40" fill="#222" className="leg-left" />
+                    <rect x="55" y="100" width="15" height="40" fill="#222" className="leg-right" />
+                  </g>
+                  {/* Body */}
+                  <rect x="20" y="40" width="60" height="70" rx="12" fill="var(--team-color)" stroke="#000" strokeWidth="2" />
+                  {/* Head */}
+                  <circle cx="50" cy="25" r="18" fill="#fbbf24" stroke="#000" strokeWidth="2" />
+                  {/* Arms */}
+                  <rect x="5" y="50" width="15" height="40" rx="5" fill="var(--team-color)" stroke="#000" strokeWidth="1" className="arm-left" />
+                  <rect x="80" y="50" width="15" height="40" rx="5" fill="var(--team-color)" stroke="#000" strokeWidth="1" className="arm-right" />
+                  {/* Number 9 */}
+                  <text x="50" y="85" textAnchor="middle" fill="#fff" fontSize="35" fontWeight="900">9</text>
+                </svg>
              </div>
           </motion.div>
         )}
