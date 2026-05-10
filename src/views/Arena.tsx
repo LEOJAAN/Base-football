@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { useBaseTransaction } from '../hooks/useBaseTransaction';
 import type { Team } from './TeamSelection';
 import './Arena.css';
@@ -176,7 +177,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const isDraw = playerScore === aiScore;
 
   // Animation Variants
-  const strikerVariants = {
+  const strikerVariants: Variants = {
     idle: { y: 0, x: '-50%', scale: 1, opacity: 1 },
     running: { 
       y: -150, 
@@ -193,7 +194,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     }
   };
 
-  const keeperVariants = {
+  const keeperVariants: Variants = {
     center: { x: '-50%', y: 0, rotate: 0, scale: 1 },
     left: { 
       x: '-180%', 
@@ -211,7 +212,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     }
   };
 
-  const ballVariants = {
+  const ballVariants: Variants = {
     center: { bottom: '25%', left: '50%', scale: 1, rotate: 0 },
     left: { 
       bottom: '65%', 
@@ -322,7 +323,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
         <motion.div 
           className={`ball ${role === 'striker' ? 'ball-user' : 'ball-bot'}`}
           variants={ballVariants}
-          animate={ballPos === 'center' ? 'center' : (ballPos === 'center' ? 'center-goal' : ballPos)}
+          animate={ballPos === 'center' ? (matchState === 'playing' ? 'center' : 'center-goal') : ballPos}
           initial="center"
         >
           <div className="ball-trail"></div>
