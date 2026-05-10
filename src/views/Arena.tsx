@@ -211,20 +211,20 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   // Animation Variants
   const cameraVariants: Variants = {
     idle: { scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-    zoomed: { scale: 1.4, y: 150, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } }
+    zoomed: { scale: 1.4, y: 220, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } }
   };
 
   const strikerVariants: Variants = {
     idle: { 
-      y: 10, 
-      x: '-100%', 
-      scale: 1.1, 
+      y: 40, 
+      x: '-120%', 
+      scale: 1.2, 
       rotate: 15,
       opacity: 1,
       transition: { duration: 0.3 }
     },
     running: { 
-      y: -155, 
+      y: -210, 
       x: '-50%', 
       scale: 0.55,
       rotate: 0,
@@ -235,7 +235,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       }
     },
     kicking: { 
-      y: -155,
+      y: -210,
       x: '-50%',
       scale: 0.55,
       rotate: 0,
@@ -245,7 +245,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     exit: {
       opacity: 0,
       scale: 0.3,
-      y: -180,
+      y: -240,
       transition: { duration: 0.4 }
     }
   };
@@ -254,14 +254,14 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     center: { x: '-50%', y: 0, rotate: 0, scale: 1 },
     left: { 
       x: '-220%', 
-      y: 60, 
+      y: 40, 
       rotate: -95, 
       scale: 0.85,
       transition: { type: "spring", stiffness: 180, damping: 15 }
     },
     right: { 
       x: '120%', 
-      y: 60, 
+      y: 40, 
       rotate: 95, 
       scale: 0.85,
       transition: { type: "spring", stiffness: 180, damping: 15 }
@@ -271,23 +271,23 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const ballVariants: Variants = {
     center: { bottom: '25%', left: '50%', scale: 1, rotate: 0 },
     left: { 
-      bottom: '68%', 
+      bottom: '78%', 
       left: '25%', 
-      scale: 0.25, 
+      scale: 0.2, 
       rotate: 1440,
       transition: { duration: 0.5, ease: "easeOut" } 
     },
     right: { 
-      bottom: '68%', 
+      bottom: '78%', 
       left: '75%', 
-      scale: 0.25, 
+      scale: 0.2, 
       rotate: -1440,
       transition: { duration: 0.5, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '68%', 
+      bottom: '78%', 
       left: '50%', 
-      scale: 0.25, 
+      scale: 0.2, 
       rotate: 1080,
       transition: { duration: 0.5, ease: "easeOut" } 
     }
