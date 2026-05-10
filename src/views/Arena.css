@@ -25,31 +25,30 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 25%; /* Reduced to 25% */
+  height: 20%; /* Minimized to 20% */
   display: flex;
   z-index: 1;
-  background: #080a15;
+  background: #05070a;
   overflow: hidden;
   perspective: 1000px;
-  border-bottom: 3px solid #000;
+  border-bottom: 2px solid #000;
 }
 
 .pixel-crowd {
   flex: 1;
   height: 100%;
   background-image: 
-    radial-gradient(circle at 2px 2px, #334155 1px, transparent 1px),
+    radial-gradient(circle at 2px 2px, #2a3341 1px, transparent 1px),
     radial-gradient(circle at 6px 6px, #0f172a 1px, transparent 1px);
   background-size: 8px 12px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .pixel-crowd.team-section {
   background-image: 
     radial-gradient(circle at 2px 2px, var(--team-color) 1.5px, transparent 1.5px),
-    radial-gradient(circle at 6px 6px, #080a15 1px, transparent 1px);
-  opacity: 1;
+    radial-gradient(circle at 6px 6px, #05070a 1px, transparent 1px);
+  opacity: 0.8;
 }
 
 /* Fence */
@@ -58,42 +57,42 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 25%; /* Matches crowd height */
+  height: 20%;
   background-image: 
     radial-gradient(circle at 50% 50%, transparent 20%, rgba(255, 255, 255, 0.05) 20%),
-    linear-gradient(45deg, transparent 45%, #555 45%, #555 55%, transparent 55%),
-    linear-gradient(-45deg, transparent 45%, #555 55%, #555 55%, transparent 55%);
+    linear-gradient(45deg, transparent 45%, #444 45%, #444 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, #444 55%, #444 55%, transparent 55%);
   background-size: 10px 10px;
   z-index: 2;
-  opacity: 0.2;
+  opacity: 0.15;
 }
 
 
-/* Grass Pitch - Expanded 3D Perspective */
+/* Grass Pitch - Vertical Depth Focus */
 .pitch-surface {
   position: absolute;
   bottom: 0;
-  height: 160%; /* Taller to stretch into the background */
-  width: 400%;  /* Much wider for dramatic trapezoid */
-  left: -150%;
+  height: 150%; 
+  width: 100%; /* Reverted to 100% */
+  left: 0;
   background: 
     repeating-linear-gradient(90deg, 
       #4d7c0f 0px, 
-      #4d7c0f 100px, 
-      #45700d 100px, 
-      #45700d 200px
+      #4d7c0f 80px, 
+      #45700d 80px, 
+      #45700d 160px
     );
   z-index: 3;
-  transform: perspective(300px) rotateX(25deg);
+  transform: perspective(600px) rotateX(45deg); /* Sharper perspective */
   transform-origin: bottom center;
-  box-shadow: inset 0 50px 100px rgba(0,0,0,0.6);
+  box-shadow: inset 0 60px 120px rgba(0,0,0,0.7);
 }
 
 /* Pitch Line (Penalty Spot Area) */
 .pitch-surface::after {
   content: '';
   position: absolute;
-  top: 40%;
+  top: 55%; /* Shifted for vertical focus */
   left: 0;
   right: 0;
   height: 6px;
@@ -104,17 +103,17 @@
 /* Advertisement Boards */
 .ad-boards {
   position: absolute;
-  top: 45%;
+  top: 30%; /* Shifted higher */
   left: 0;
   right: 0;
   height: 60px;
-  background: #1a1a1a;
+  background: #0a0a0a;
   z-index: 4;
   display: flex;
   align-items: center;
   overflow: hidden;
-  border-top: 2px solid #444;
-  border-bottom: 2px solid #222;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #111;
 }
 
 .ad-track {
@@ -266,10 +265,10 @@
 
 .goal-post {
   position: absolute;
-  top: 15%; /* Higher up */
-  width: 65%;
+  top: 25%; /* Higher up for vertical focus */
+  width: 70%;
   max-width: 800px;
-  height: 40%;
+  height: 45%;
   border: 10px solid #fff;
   border-bottom: none;
   border-radius: 6px;
@@ -302,12 +301,12 @@
 /* Keeper */
 .keeper {
   position: absolute;
-  top: 38%; /* Adjusted for higher goal */
+  top: 45%; /* Adjusted for vertical depth */
   left: 50%;
   width: 50px;
   height: 90px;
   z-index: 6;
-  filter: drop-shadow(0 30px 10px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 25px 10px rgba(0,0,0,0.4));
 }
 
 
@@ -390,12 +389,12 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 38%; /* Matches above */
+  top: 45%; 
   left: 50%;
   width: 60px;
   height: 100px;
   z-index: 6;
-  filter: drop-shadow(0 30px 15px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 25px 15px rgba(0,0,0,0.5));
 }
 
 .keeper-character {
