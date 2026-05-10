@@ -299,10 +299,8 @@
   position: absolute;
   top: 45%;
   left: 50%;
-  transform: translateX(-50%);
   width: 50px;
   height: 90px;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 6;
 }
 
@@ -328,9 +326,6 @@
   border-radius: 50%;
 }
 
-.keeper.pos-left { left: 25%; transform: translateX(-50%) rotate(-15deg); }
-.keeper.pos-center { left: 50%; transform: translateX(-50%); }
-.keeper.pos-right { left: 75%; transform: translateX(-50%) rotate(15deg); }
 
 /* Striker (Foreground View) */
 .striker-foreground {
@@ -367,7 +362,6 @@
   position: absolute;
   bottom: 25%;
   left: 50%;
-  transform: translateX(-50%);
   width: 50px;
   height: 50px;
   background: #fff;
@@ -377,13 +371,9 @@
   background-size: 100%, 20px 20px;
   border-radius: 50%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-  transition: all 0.7s cubic-bezier(0.1, 0.8, 0.2, 1);
   z-index: 12;
 }
 
-.ball.pos-left { bottom: 65%; left: 25%; transform: translateX(-50%) scale(0.5); }
-.ball.pos-center { bottom: 65%; left: 50%; transform: translateX(-50%) scale(0.5); }
-.ball.pos-right { bottom: 65%; left: 75%; transform: translateX(-50%) scale(0.5); }
 
 .ball-user { box-shadow: 0 0 20px #3b82f6; }
 .ball-bot { box-shadow: 0 0 20px #ef4444; }
