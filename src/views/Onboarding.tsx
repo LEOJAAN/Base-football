@@ -3,6 +3,7 @@ import { useAccount, useSwitchChain } from 'wagmi';
 import { base } from 'wagmi/chains';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import './Onboarding.css';
+import './Arena.css'; // Import Arena styles for the background
 
 interface OnboardingProps {
   onComplete: (username: string) => void;
@@ -23,12 +24,42 @@ export function Onboarding({ onComplete }: OnboardingProps) {
   };
 
   return (
-    <div className="onboarding-container">
-      <div className="onboarding-bg"></div>
+    <div className="onboarding-container arena-container" style={{ '--team-color': '#0052FF' } as React.CSSProperties}>
+      <div className="stadium-bg">
+        <div className="crowd-stands">
+          <div className="pixel-crowd idle"></div>
+          <div className="pixel-crowd idle team-section"></div>
+          <div className="pixel-crowd idle"></div>
+        </div>
+        <div className="fence-overlay"></div>
+        <div className="pitch-surface"></div>
+        
+        <div className="ad-boards">
+          <div className="ad-track">
+            {[1, 2].map((i) => (
+              <div key={i} className="ad-group" style={{ display: 'flex' }}>
+                <div className="ad-item"><span className="base-icon">●</span> BASE APP</div>
+                <div className="ad-item"><span className="aero-icon">▲</span> AERODROME</div>
+                <div className="ad-item"><span className="aave-icon">👻</span> AAVE</div>
+                <div className="ad-item"><span className="base-icon">●</span> BUILT ON BASE</div>
+                <div className="ad-item"><span className="aero-icon">◆</span> ACROSS</div>
+                <div className="ad-item">0xSPLITS</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="pitch-camera-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <div className="pitch">
+          <div className="goal-post">
+            <div className="net"></div>
+          </div>
+        </div>
+      </div>
       
-      <div className="glass-panel onboarding-panel animate-fade-in">
+      <div className="glass-panel onboarding-panel animate-fade-in" style={{ zIndex: 10 }}>
         <div className="logo-container">
-          <div className="base-logo-mock"></div>
           <h1>Base Penalty Arena</h1>
           <p className="subtitle">High-tech football on the Base network</p>
         </div>

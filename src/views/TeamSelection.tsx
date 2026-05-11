@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TeamSelection.css';
+import './Arena.css'; // Import Arena styles for the background
 
 export interface Team {
   id: string;
@@ -76,13 +77,46 @@ export function TeamSelection({ onSelectTeam, username }: TeamSelectionProps) {
   };
 
   return (
-    <div className="team-selection-container">
-      <div className="header-section animate-fade-in">
-        <h2>Welcome, {username}!</h2>
-        <p>Select your protocol to represent in the Arena.</p>
+    <div className="team-selection-container arena-container">
+      <div className="stadium-bg" style={{ opacity: 0.7 }}>
+        <div className="crowd-stands">
+          <div className="pixel-crowd idle"></div>
+          <div className="pixel-crowd idle"></div>
+          <div className="pixel-crowd idle"></div>
+        </div>
+        <div className="fence-overlay"></div>
+        <div className="pitch-surface"></div>
+        
+        <div className="ad-boards">
+          <div className="ad-track">
+            {[1, 2].map((i) => (
+              <div key={i} className="ad-group" style={{ display: 'flex' }}>
+                <div className="ad-item"><span className="base-icon">●</span> BASE APP</div>
+                <div className="ad-item"><span className="aero-icon">▲</span> AERODROME</div>
+                <div className="ad-item"><span className="aave-icon">👻</span> AAVE</div>
+                <div className="ad-item"><span className="base-icon">●</span> BUILT ON BASE</div>
+                <div className="ad-item"><span className="aero-icon">◆</span> ACROSS</div>
+                <div className="ad-item">0xSPLITS</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="teams-grid">
+      <div className="pitch-camera-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.7 }}>
+        <div className="pitch">
+          <div className="goal-post">
+            <div className="net"></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="header-section animate-fade-in" style={{ position: 'relative', zIndex: 10 }}>
+        <h2 style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Welcome, {username}!</h2>
+        <p style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Select your protocol to represent in the Arena.</p>
+      </div>
+
+      <div className="teams-grid" style={{ position: 'relative', zIndex: 10 }}>
         {teams.map((team, index) => (
           <div 
             key={team.id}
@@ -111,7 +145,7 @@ export function TeamSelection({ onSelectTeam, username }: TeamSelectionProps) {
         ))}
       </div>
 
-      <div className="action-bar animate-fade-in" style={{ animationDelay: '0.5s' }}>
+      <div className="action-bar animate-fade-in" style={{ animationDelay: '0.5s', position: 'relative', zIndex: 10 }}>
         <button 
           className="primary-btn confirm-team-btn" 
           disabled={!selectedId}
