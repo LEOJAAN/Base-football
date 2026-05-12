@@ -409,8 +409,8 @@
 }
 
 
-.ball-user { box-shadow: 0 0 20px #3b82f6; }
-.ball-bot { box-shadow: 0 0 20px #ef4444; }
+.ball-user { /* no glow */ }
+.ball-bot  { /* no glow */ }
 
 .ball-trail {
   position: absolute;
@@ -787,8 +787,8 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 0 15px #0052FF;
-  filter: drop-shadow(0 20px 10px rgba(0,0,0,0.5));
+  /* glow removed */
+  filter: drop-shadow(0 6px 4px rgba(0,0,0,0.5));
 }
 
 .base-ball-svg {
@@ -797,6 +797,10 @@
 }
 
 .ball {
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  transform-origin: center;
   background: none !important;
   box-shadow: none !important;
 }
