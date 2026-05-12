@@ -465,14 +465,17 @@
 
 /* --- CONTROLS --- */
 .controls {
-  position: relative;
+  position: absolute;
+  right: 1.5rem;
+  bottom: 50%;
+  transform: translateY(50%);
   z-index: 30;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto 2rem;
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
+  width: 160px;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
   text-align: center;
   transition: 0.3s;
 }
@@ -485,22 +488,35 @@
 
 .control-buttons {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .control-btn {
-  flex: 1;
-  padding: 1rem;
+  width: 100%;
+  padding: 0.9rem 0.5rem;
   background: #fff;
   color: #000;
   border: none;
   font-weight: 900;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: 0.2s;
+  touch-action: manipulation;
 }
 
 /* --- OVERLAYS --- */
-.result-overlay h1 { font-size: 6rem; text-shadow: 4px 4px 0 #000; }
+.result-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+.result-overlay h1 { font-size: 6rem; text-shadow: 4px 4px 0 #000; margin: 0; }
 
 .game-over-overlay {
   position: absolute;
@@ -797,8 +813,72 @@
 }
 
 @media (max-width: 768px) {
-  .turn-overlay h1 { font-size: 3rem; letter-spacing: 4px; }
-  .status-label span { font-size: 0.9rem; }
-  .status-label { padding: 8px 16px; }
-  .floating-feedback { font-size: 1.5rem; }
+  /* HUD & Scoreboard */
+  .hud { padding-top: 10px; }
+  .score-board {
+    min-width: 260px;
+    padding: 6px 14px;
+  }
+  .score-team { font-size: 0.85rem; }
+  .score-center { font-size: 1.4rem; gap: 10px; }
+  .indicator { font-size: 0.6rem; padding: 2px 6px; }
+  .history-dot { width: 9px; height: 9px; }
+
+  /* Status label */
+  .status-label-container { margin-top: 8px; }
+  .status-label { padding: 6px 12px; }
+  .status-label span { font-size: 0.75rem; }
+
+  /* Turn overlay */
+  .turn-overlay h1 { font-size: 2.2rem; letter-spacing: 4px; }
+
+  /* Floating feedback */
+  .floating-feedback { font-size: 1.4rem; }
+
+  /* Controls — keep on right but tighter */
+  .controls {
+    right: 0.6rem;
+    width: 120px;
+    padding: 0.7rem 0.5rem;
+  }
+  .control-buttons { gap: 0.5rem; }
+  .control-btn {
+    padding: 0.85rem 0.3rem;
+    font-size: 0.65rem;
+    border-radius: 10px !important;
+  }
+
+  /* Ad boards — smaller text */
+  .ad-item { font-size: 0.85rem; padding: 0 20px; }
+
+  /* Result overlay */
+  .result-overlay h1 { font-size: 3.5rem; }
+
+  /* Game over screen */
+  .end-game-content h2 { font-size: 2.5rem; letter-spacing: 2px; }
+  .final-score { font-size: 1.1rem; }
+  .futuristic-panel-btn { padding: 0.9rem 1.2rem; font-size: 0.9rem; }
+  .end-game-actions { max-width: 260px; }
+}
+
+@media (max-width: 480px) {
+  /* Extra small phones */
+  .score-board { min-width: 220px; padding: 5px 10px; }
+  .score-team { font-size: 0.7rem; }
+  .score-center { font-size: 1.1rem; gap: 6px; }
+
+  .controls {
+    right: 0.4rem;
+    width: 100px;
+    padding: 0.5rem 0.4rem;
+    border-radius: 10px;
+  }
+  .control-btn {
+    padding: 0.75rem 0.2rem;
+    font-size: 0.58rem;
+    border-radius: 8px !important;
+  }
+
+  .turn-overlay h1 { font-size: 1.8rem; }
+  .end-game-content h2 { font-size: 2rem; }
 }
