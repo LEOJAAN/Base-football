@@ -216,36 +216,36 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   const strikerVariants: Variants = {
     idle: { 
-      y: 40, 
+      y: 60, 
       x: '-80%', 
-      scale: 1.1, 
+      scale: 1.2, 
       rotate: 10,
       opacity: 1,
       transition: { duration: 0.3 }
     },
     running: { 
-      y: -180, 
+      y: -240, 
       x: '-50%', 
-      scale: 0.55,
+      scale: 0.45,
       rotate: 0,
       opacity: 1,
       transition: { 
-        duration: 0.8, 
+        duration: 0.9, 
         ease: [0.4, 0, 0.2, 1] 
       }
     },
     kicking: { 
-      y: -180,
+      y: -240,
       x: '-50%',
-      scale: 0.55,
+      scale: 0.45,
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.1 } 
     },
     exit: {
       opacity: 0,
-      scale: 0.3,
-      y: -210,
+      scale: 0.25,
+      y: -270,
       transition: { duration: 0.4 }
     }
   };
@@ -269,27 +269,27 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   };
 
   const ballVariants: Variants = {
-    center: { bottom: '25%', left: '50%', scale: 1, rotate: 0 },
+    center: { bottom: '15%', left: '50%', scale: 1.3, rotate: 0 },
     left: { 
-      bottom: '68%', 
-      left: '25%', 
-      scale: 0.25, 
+      bottom: '75%', 
+      left: '18%', 
+      scale: 0.2, 
       rotate: 1440,
-      transition: { duration: 0.5, ease: "easeOut" } 
+      transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
-      bottom: '68%', 
-      left: '75%', 
-      scale: 0.25, 
+      bottom: '75%', 
+      left: '82%', 
+      scale: 0.2, 
       rotate: -1440,
-      transition: { duration: 0.5, ease: "easeOut" } 
+      transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '68%', 
+      bottom: '75%', 
       left: '50%', 
-      scale: 0.25, 
+      scale: 0.2, 
       rotate: 1080,
-      transition: { duration: 0.5, ease: "easeOut" } 
+      transition: { duration: 0.6, ease: "easeOut" } 
     }
   };
 
@@ -402,10 +402,12 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
             animate={ballPos === 'center' ? (matchState === 'playing' ? 'center' : 'center-goal') : ballPos}
             initial="center"
           >
-            <div className="base-logo-ball">
+            <div className="standard-ball">
               <svg viewBox="0 0 100 100" className="base-ball-svg">
-                <circle cx="50" cy="50" r="45" fill="#0052FF" />
-                <circle cx="50" cy="50" r="25" fill="#fff" />
+                <circle cx="50" cy="50" r="45" fill="#fff" stroke="#000" strokeWidth="3" />
+                <path d="M50 20 L65 40 L50 60 L35 40 Z" fill="#000" />
+                <path d="M50 60 L70 75 L80 50 L65 40 Z" fill="#000" />
+                <path d="M50 60 L30 75 L20 50 L35 40 Z" fill="#000" />
               </svg>
             </div>
             <div className="ball-trail"></div>
