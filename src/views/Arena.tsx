@@ -384,26 +384,34 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
             initial="center"
           >
              <div className={`keeper-character reaction-${keeperReaction}`}>
-                <svg viewBox="0 0 100 140" className="keeper-svg">
-                  {/* Detailed Body */}
-                  <g className="keeper-body">
-                    <path d="M30 100 L30 135 L45 135 L45 100 Z" fill={characters.skin} />
-                    <path d="M55 100 L55 135 L70 135 L70 100 Z" fill={characters.skin} />
-                    <rect x="25" y="40" width="50" height="65" rx="8" fill={characters.kit} stroke="rgba(0,0,0,0.2)" strokeWidth="2" />
-                    {/* Jersey Texture */}
-                    <path d="M25 55 L75 55" stroke="rgba(0,0,0,0.1)" strokeWidth="4" />
+                <svg viewBox="0 0 100 145" className="keeper-svg">
+                  {/* High Detail Body Structure */}
+                  <g className="keeper-legs">
+                    <path d="M32 105 L30 140 L45 140 L44 105 Z" fill={characters.skin} />
+                    <path d="M56 105 L55 140 L70 140 L68 105 Z" fill={characters.skin} />
+                    <rect x="28" y="135" width="18" height="8" rx="2" fill="#000" />
+                    <rect x="54" y="135" width="18" height="8" rx="2" fill="#000" />
                   </g>
                   
-                  {/* Head with hair */}
+                  <g className="keeper-torso">
+                    <rect x="25" y="40" width="50" height="68" rx="10" fill={characters.kit} />
+                    {/* Jersey Detail */}
+                    <path d="M25 55 L75 55" stroke="rgba(255,255,255,0.1)" strokeWidth="4" />
+                    <path d="M50 40 L50 108" stroke="rgba(0,0,0,0.05)" strokeWidth="2" />
+                  </g>
+                  
                   <g className="keeper-head">
-                    <circle cx="50" cy="22" r="16" fill={characters.skin} stroke="rgba(0,0,0,0.2)" />
-                    <path d="M35 15 Q50 5 65 15" stroke="#2d1d1d" strokeWidth="8" fill="none" strokeLinecap="round" />
+                    <circle cx="50" cy="22" r="17" fill={characters.skin} />
+                    {/* Hair Detail */}
+                    <path d="M33 15 Q50 2 67 15 L67 22 Q50 28 33 22 Z" fill="#2d1d1d" />
+                    {/* Eyes */}
+                    <circle cx="43" cy="22" r="1.5" fill="#000" />
+                    <circle cx="57" cy="22" r="1.5" fill="#000" />
                   </g>
 
-                  {/* Arms/Gloves */}
                   <g className="keeper-arms">
-                    <path d="M10 50 L25 60 L25 75 L10 65 Z" fill="#fff" stroke="#ccc" className="arm-left" />
-                    <path d="M90 50 L75 60 L75 75 L90 65 Z" fill="#fff" stroke="#ccc" className="arm-right" />
+                    <path d="M8 55 L25 65 L25 85 L8 75 Z" fill="#fff" className="arm-left" />
+                    <path d="M92 55 L75 65 L75 85 L92 75 Z" fill="#fff" className="arm-right" />
                   </g>
                 </svg>
                 <div className="keeper-name-label">{characters.keeper}</div>
@@ -448,29 +456,34 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
               initial="idle"
             >
                <div className="striker-character">
-                  <svg viewBox="0 0 100 150" className="striker-svg">
-                    {/* Realistic Proportions */}
+                  <svg viewBox="0 0 100 165" className="striker-svg">
+                    {/* Detailed Striker Body */}
                     <g className="striker-legs">
-                      <path d="M35 105 L32 145 L46 145 L44 105 Z" fill={characters.skin} className="leg-left" />
-                      <path d="M56 105 L58 145 L72 145 L68 105 Z" fill={characters.skin} className="leg-right" />
-                      <rect x="30" y="140" width="18" height="8" rx="2" fill="#111" className="boot-left" />
-                      <rect x="56" y="140" width="18" height="8" rx="2" fill="#111" className="boot-right" />
+                      <path d="M34 115 L31 155 L46 155 L45 115 Z" fill={characters.skin} className="leg-left" />
+                      <path d="M55 115 L54 155 L69 155 L66 115 Z" fill={characters.skin} className="leg-right" />
+                      <rect x="29" y="152" width="20" height="10" rx="3" fill="#111" className="boot-left" />
+                      <rect x="53" y="152" width="20" height="10" rx="3" fill="#111" className="boot-right" />
                     </g>
                     
-                    <rect x="25" y="40" width="50" height="70" rx="10" fill={characters.kit} stroke="rgba(0,0,0,0.1)" strokeWidth="2" />
+                    <g className="striker-torso">
+                      <rect x="25" y="45" width="50" height="75" rx="12" fill={characters.kit} />
+                      <text x="50" y="100" textAnchor="middle" fill="rgba(255,255,255,0.6)" fontSize="32" fontWeight="900" style={{ pointerEvents: 'none' }}>
+                        {characters.striker === 'Ronaldo' ? '7' : '10'}
+                      </text>
+                    </g>
                     
-                    {/* Head with hair/features */}
                     <g className="striker-head">
-                       <circle cx="50" cy="22" r="17" fill={characters.skin} stroke="rgba(0,0,0,0.1)" />
-                       <path d="M35 15 Q50 5 65 15" stroke="#2d1d1d" strokeWidth="10" fill="none" strokeLinecap="round" />
+                       <circle cx="50" cy="25" r="18" fill={characters.skin} />
+                       {/* Hair Texture */}
+                       <path d="M32 18 Q50 5 68 18 L68 25 Q50 32 32 25 Z" fill="#2d1d1d" />
+                       <circle cx="43" cy="25" r="1.5" fill="#000" />
+                       <circle cx="57" cy="25" r="1.5" fill="#000" />
                     </g>
 
-                    <path d="M12 55 L25 65 L25 90 L12 80 Z" fill={characters.kit} className="arm-left" />
-                    <path d="M88 55 L75 65 L75 90 L88 80 Z" fill={characters.kit} className="arm-right" />
-                    
-                    <text x="50" y="85" textAnchor="middle" fill="rgba(255,255,255,0.8)" fontSize="24" fontWeight="900">
-                      {characters.striker === 'Ronaldo' ? '7' : '10'}
-                    </text>
+                    <g className="striker-arms">
+                      <path d="M10 60 L25 70 L25 100 L10 90 Z" fill={characters.kit} className="arm-left" />
+                      <path d="M90 60 L75 70 L75 100 L90 90 Z" fill={characters.kit} className="arm-right" />
+                    </g>
                   </svg>
                   <div className="striker-name-label">{characters.striker}</div>
                </div>
