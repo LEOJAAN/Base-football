@@ -294,10 +294,10 @@
 }
 
 .goal-post {
-  top: 19%; /* Move to horizon */
-  width: 32%; /* Scale down for distance */
+  top: 21%; /* Lowered slightly to overlap the grass */
+  width: 32%;
   max-width: 500px;
-  height: 25%;
+  height: 26%;
   min-height: 160px;
   z-index: 5;
   transform-style: preserve-3d;
@@ -312,7 +312,6 @@
   pointer-events: none;
 }
 
-/* Simplified realistic goal frame */
 .goal-back {
   position: absolute;
   inset: 0;
@@ -322,6 +321,28 @@
   z-index: 10;
   box-shadow: 0 15px 35px rgba(0,0,0,0.4);
   border-radius: 4px;
+}
+
+/* Ground Contact Shadows */
+.goal-back::before, .goal-back::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  width: 40px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(6px);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.goal-back::before { left: -11px; }
+.goal-back::after { right: -11px; }
+
+/* Subtle pole extension into the ground */
+.goal-back::after, .goal-back::before {
+  /* We use box-shadow to extend the pole visually */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
 .net {
@@ -439,7 +460,7 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 24%; /* Align with background goal */
+  top: 26%; /* Align with lowered background goal */
   left: 50%;
   width: 45px; /* Scaled down */
   height: 75px;
