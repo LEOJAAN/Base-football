@@ -370,7 +370,29 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       >
         <div className="pitch">
           <div className={`goal-post ${isNetShaking ? 'net-shaking' : ''}`}>
-            <div className="goal-frame"></div>
+            <div className="goal-frame">
+              <svg viewBox="0 0 1000 420" preserveAspectRatio="none" className="goal-svg">
+                <defs>
+                  <filter id="postShadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                    <feOffset dx="2" dy="2" result="offsetblur" />
+                    <feComponentTransfer>
+                      <feFuncA type="linear" slope="0.5" />
+                    </feComponentTransfer>
+                    <feMerge>
+                      <feMergeNode />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                {/* Left Post */}
+                <rect x="0" y="0" width="16" height="100%" fill="#fff" stroke="#999" strokeWidth="1" filter="url(#postShadow)" />
+                {/* Right Post */}
+                <rect x="984" y="0" width="16" height="100%" fill="#fff" stroke="#999" strokeWidth="1" filter="url(#postShadow)" />
+                {/* Crossbar */}
+                <rect x="0" y="0" width="100%" height="16" fill="#fff" stroke="#999" strokeWidth="1" filter="url(#postShadow)" />
+              </svg>
+            </div>
             <div className="goal-depth"></div>
             <div className="goal-back">
                <div className="net"></div>

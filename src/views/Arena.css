@@ -307,12 +307,15 @@
 .goal-frame {
   position: absolute;
   inset: 0;
-  border: 15px solid #fff; /* Much thicker frame for realism */
-  border-bottom: none;
-  border-radius: 4px;
   z-index: 10;
   background: transparent;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+.goal-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,0.4));
 }
 
 .goal-depth {
@@ -329,7 +332,8 @@
   width: 180px;
   border: 10px solid #fff;
   border-bottom: none;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px #999, 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .goal-depth::before {
@@ -350,8 +354,9 @@
   transform: translateZ(-175px) scale(0.9);
   border: 10px solid rgba(255, 255, 255, 0.8);
   border-bottom: none;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   z-index: 0;
+  box-shadow: inset 0 0 0 1px rgba(153, 153, 153, 0.5);
 }
 
 .net {
