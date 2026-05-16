@@ -370,7 +370,6 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       >
         <div className="pitch">
           <div className={`goal-post ${isNetShaking ? 'net-shaking' : ''}`}>
-            <div className="goal-depth"></div>
             <div className="goal-back">
                <div className="net"></div>
             </div>
