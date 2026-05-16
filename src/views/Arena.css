@@ -294,11 +294,13 @@
 }
 
 .goal-post {
-  top: 22%; /* Sunk deeper into the horizon */
-  width: 32%;
-  max-width: 500px;
-  height: 28%; /* Increased height to extend into ground */
-  min-height: 160px;
+  top: 1%; /* Positioned so bottom edge meets the horizon precisely */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  max-width: 450px;
+  height: 19%; /* Bottom will be at 20% */
+  min-height: 140px;
   z-index: 5;
   transform-style: preserve-3d;
   perspective: 1500px;
@@ -319,38 +321,25 @@
   border-bottom: none;
   background: rgba(255, 255, 255, 0.01);
   z-index: 10;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   border-radius: 4px;
 }
 
-/* Ground Contact Shadows & Pole Extensions */
+/* Clear Ground Contact */
 .goal-back::before, .goal-back::after {
   content: '';
   position: absolute;
-  bottom: -15px; /* Extend below the frame */
-  width: 45px;
-  height: 15px;
-  background: rgba(0, 0, 0, 0.7);
-  filter: blur(8px);
+  bottom: -4px; /* Slight overlap with grass for contact */
+  width: 40px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  filter: blur(4px);
   border-radius: 50%;
   z-index: -1;
 }
 
-.goal-back::before { 
-  left: -13px; 
-  /* Vertical pole extension */
-  box-shadow: 0 -10px 0 0 #fff; 
-}
-.goal-back::after { 
-  right: -13px; 
-  /* Vertical pole extension */
-  box-shadow: 0 -10px 0 0 #fff; 
-}
-
-/* Realistic turf occlusion (darker base) */
-.goal-back {
-  mask-image: linear-gradient(to bottom, black 95%, rgba(0,0,0,0.8) 100%);
-}
+.goal-back::before { left: -11px; }
+.goal-back::after { right: -11px; }
 
 .net {
   position: absolute;
@@ -467,12 +456,12 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 28%; /* Align with deeper grounded goal */
+  top: 15%; /* Sits realistically in front of the center of the adjusted goal */
   left: 50%;
-  width: 45px; /* Scaled down */
-  height: 75px;
+  width: 40px;
+  height: 70px;
   z-index: 6;
-  filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 10px 8px rgba(0,0,0,0.4));
 }
 
 .keeper-character {
