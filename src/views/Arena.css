@@ -96,7 +96,7 @@
       #45700d 120px, 
       #45700d 240px
     );
-  z-index: 3;
+  z-index: 1;
   transform: perspective(800px) rotateX(65deg); /* Deeper, more aggressive perspective */
   transform-origin: bottom center;
   box-shadow: inset 0 80px 150px rgba(0,0,0,0.8);
@@ -295,14 +295,14 @@
 
 .goal-post {
   position: absolute;
-  top: 1%; /* Positioned so bottom edge meets the horizon precisely */
+  top: 16%; /* Pushed up towards horizon */
   left: 50%;
-  transform: translateX(-50%);
-  width: 32%;
-  max-width: 500px;
-  height: 22%; 
-  min-height: 160px;
-  z-index: 5;
+  transform: translate(-50%, -50%) scale(0.55); /* Smaller for distance */
+  width: 28%;
+  max-width: 400px;
+  height: 20%; 
+  min-height: 120px;
+  z-index: 2; /* Behind keeper and striker */
   transform-style: preserve-3d;
   perspective: 1500px;
 }
@@ -386,7 +386,7 @@
   transform: translateX(-50%);
   width: 140px;
   height: 220px;
-  z-index: 15;
+  z-index: 10;
   pointer-events: none;
   filter: drop-shadow(0 35px 15px rgba(0,0,0,0.6));
 }
@@ -457,13 +457,12 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 18%; /* Adjusted to match centered background goal */
+  top: 24%; /* Balanced position in front of goal */
   left: 50%;
-  /* transform: translateX(-50%) is handled by motion variants center/left/right */
-  width: 45px;
-  height: 75px;
-  z-index: 6;
-  filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+  width: 40px;
+  height: 65px;
+  z-index: 5;
+  filter: drop-shadow(0 12px 8px rgba(0,0,0,0.5));
 }
 
 .keeper-character {
