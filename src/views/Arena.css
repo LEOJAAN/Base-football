@@ -294,17 +294,16 @@
 }
 
 .goal-post {
-  position: absolute;
-  top: 16%; /* Aligned with distant horizon line */
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.45); /* Forced perspective shrink */
-  width: 24%;
-  max-width: 380px;
-  height: 20%; 
-  min-height: 110px;
-  z-index: 1; /* Behind both keeper and striker */
-  transform-style: preserve-3d;
-  perspective: 1500px;
+    position: absolute !important;
+    left: 50% !important;
+    top: 15% !important;
+    transform: translate(-50%, 0) !important;
+    width: 25% !important;
+    max-width: 25% !important;
+    height: auto !important;
+    z-index: 1 !important;
+    transform-style: preserve-3d;
+    perspective: 1500px;
 }
 
 .goal-frame {
@@ -457,12 +456,12 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 22%; /* Perfectly centered in front of the 16% horizon goal */
+  top: 22%; /* Perfectly centered in front of the goal */
   left: 50%;
-  width: 38px;
-  height: 65px;
+  width: 32px;
+  height: 55px;
   z-index: 5;
-  filter: drop-shadow(0 12px 6px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 8px 4px rgba(0,0,0,0.5));
 }
 
 .keeper-character {

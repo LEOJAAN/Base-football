@@ -272,22 +272,22 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     center: { bottom: '15%', left: '50%', scale: 1.3, rotate: 0 },
     left: { 
       bottom: '80%', 
-      left: '44%', 
-      scale: 0.09, 
+      left: '43%', 
+      scale: 0.1, 
       rotate: 1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
       bottom: '80%', 
-      left: '56%', 
-      scale: 0.09, 
+      left: '57%', 
+      scale: 0.1, 
       rotate: -1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
       bottom: '80%', 
       left: '50%', 
-      scale: 0.09, 
+      scale: 0.1, 
       rotate: 1080,
       transition: { duration: 0.6, ease: "easeOut" } 
     }
