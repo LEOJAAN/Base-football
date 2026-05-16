@@ -294,13 +294,14 @@
 }
 
 .goal-post {
+  position: absolute;
   top: 1%; /* Positioned so bottom edge meets the horizon precisely */
   left: 50%;
   transform: translateX(-50%);
-  width: 30%;
-  max-width: 450px;
-  height: 19%; /* Bottom will be at 20% */
-  min-height: 140px;
+  width: 32%;
+  max-width: 500px;
+  height: 22%; 
+  min-height: 160px;
   z-index: 5;
   transform-style: preserve-3d;
   perspective: 1500px;
@@ -456,12 +457,13 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 15%; /* Sits realistically in front of the center of the adjusted goal */
+  top: 18%; /* Adjusted to match centered background goal */
   left: 50%;
-  width: 40px;
-  height: 70px;
+  /* transform: translateX(-50%) is handled by motion variants center/left/right */
+  width: 45px;
+  height: 75px;
   z-index: 6;
-  filter: drop-shadow(0 10px 8px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
 }
 
 .keeper-character {
