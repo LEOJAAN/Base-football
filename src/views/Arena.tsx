@@ -271,21 +271,21 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const ballVariants: Variants = {
     center: { bottom: '15%', left: '50%', scale: 1.3, rotate: 0 },
     left: { 
-      bottom: '80%', 
-      left: '43%', 
+      bottom: '77.5%', 
+      left: '46%', 
       scale: 0.1, 
       rotate: 1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
-      bottom: '80%', 
-      left: '57%', 
+      bottom: '77.5%', 
+      left: '54%', 
       scale: 0.1, 
       rotate: -1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '80%', 
+      bottom: '77.5%', 
       left: '50%', 
       scale: 0.1, 
       rotate: 1080,
