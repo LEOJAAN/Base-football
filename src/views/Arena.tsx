@@ -253,17 +253,17 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const keeperVariants: Variants = {
     center: { x: '-50%', y: 0, rotate: 0, scale: 1 },
     left: { 
-      x: '-220%', 
-      y: 50, 
+      x: '-140%', 
+      y: 20, 
       rotate: -95, 
-      scale: 0.85,
+      scale: 0.8,
       transition: { type: "spring", stiffness: 180, damping: 15 }
     },
     right: { 
-      x: '120%', 
-      y: 50, 
+      x: '40%', 
+      y: 20, 
       rotate: 95, 
-      scale: 0.85,
+      scale: 0.8,
       transition: { type: "spring", stiffness: 180, damping: 15 }
     }
   };
@@ -271,23 +271,23 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   const ballVariants: Variants = {
     center: { bottom: '15%', left: '50%', scale: 1.3, rotate: 0 },
     left: { 
-      bottom: '75%', 
-      left: '18%', 
-      scale: 0.2, 
+      bottom: '77%', 
+      left: '37%', 
+      scale: 0.15, 
       rotate: 1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
-      bottom: '75%', 
-      left: '82%', 
-      scale: 0.2, 
+      bottom: '77%', 
+      left: '63%', 
+      scale: 0.15, 
       rotate: -1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '75%', 
+      bottom: '77%', 
       left: '50%', 
-      scale: 0.2, 
+      scale: 0.15, 
       rotate: 1080,
       transition: { duration: 0.6, ease: "easeOut" } 
     }

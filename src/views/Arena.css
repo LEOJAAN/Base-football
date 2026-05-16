@@ -294,12 +294,11 @@
 }
 
 .goal-post {
-  position: absolute;
-  top: 30%; /* Lowered to align with the visual mark on the pitch */
-  width: 85%;
-  max-width: 950px;
-  height: 45%;
-  min-height: 280px;
+  top: 19%; /* Move to horizon */
+  width: 32%; /* Scale down for distance */
+  max-width: 500px;
+  height: 25%;
+  min-height: 160px;
   z-index: 5;
   transform-style: preserve-3d;
   perspective: 1500px;
@@ -440,12 +439,12 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 45%; 
+  top: 24%; /* Align with background goal */
   left: 50%;
-  width: 60px;
-  height: 100px;
+  width: 45px; /* Scaled down */
+  height: 75px;
   z-index: 6;
-  filter: drop-shadow(0 25px 15px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
 }
 
 .keeper-character {
