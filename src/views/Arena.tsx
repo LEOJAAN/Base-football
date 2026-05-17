@@ -224,7 +224,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   const strikerVariants: Variants = {
     idle: { 
-      top: '80%',
+      top: '72%',
       left: '35%', 
       scale: 1.1, 
       rotate: 0,
@@ -232,9 +232,9 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       transition: { duration: 0.3 }
     },
     running: { 
-      top: '65%', 
-      left: '46%', 
-      scale: 0.85,
+      top: '75%', 
+      left: '45%', 
+      scale: 1,
       rotate: 0,
       opacity: 1,
       transition: { 
@@ -243,18 +243,18 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       }
     },
     kicking: { 
-      top: '65%',
-      left: '46%',
-      scale: 0.85,
+      top: '75%',
+      left: '45%',
+      scale: 1,
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.1 } 
     },
     exit: {
       opacity: 0,
-      scale: 0.85,
-      top: '65%',
-      left: '46%',
+      scale: 1,
+      top: '75%',
+      left: '45%',
       transition: { duration: 0.4 }
     }
   };
@@ -278,7 +278,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   };
 
   const ballVariants: Variants = {
-    center: { top: '68%', left: '50%', scale: 1, rotate: 0 },
+    center: { top: '80%', left: '50%', scale: 1, rotate: 0 },
     left: { 
       top: '25%', 
       left: '40%', 
