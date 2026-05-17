@@ -296,16 +296,16 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 32% !important; /* Positions the base right on the pitch layout */
+    top: 24% !important; /* Adjusted perfectly so the top bar is completely visible below the marquee */
     transform: translateX(-50%) !important;
-    width: 600px !important; /* Wide enough to match the marked area */
-    height: 260px !important; /* Scaled up height for proper penalty box ratio */
-    z-index: 2 !important; /* Stays securely behind the player and ball */
-    border: 7px solid #ffffff !important;
+    width: 580px !important;
+    height: 220px !important; /* Slightly reduced height to fit the pitch horizon vertically */
+    z-index: 2 !important; /* Ensures it stays behind keeper/player but above pitch background */
+    border: 6px solid #ffffff !important;
     border-bottom: none !important;
     background: rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
 }
 
 .goal-frame {
@@ -368,11 +368,11 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 45% !important; /* Centered relative to the pitch/goal depth */
+    top: 32% !important; /* Aligns keeper beautifully inside the updated frame */
     transform: translateX(-50%) !important;
-    width: 90px !important; /* Restored normal, viewable size */
-    height: 140px !important;
-    z-index: 4 !important; /* Must sit in front of the goal net, but behind the striker */
+    width: 85px !important;
+    height: 130px !important;
+    z-index: 4 !important;
 }
 
 
