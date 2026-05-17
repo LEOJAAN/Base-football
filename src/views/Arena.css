@@ -296,7 +296,7 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 15% !important;
+    top: 36% !important;
     transform: translateX(-50%) !important;
     width: 320px !important;
     height: 140px !important;
@@ -457,7 +457,7 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 28.5% !important; /* Perfectly re-aligned with the lowered goal base */
+  top: 48% !important; /* Perfectly re-aligned with the lowered goal base */
   left: 50%;
   width: 32px;
   height: 55px;
