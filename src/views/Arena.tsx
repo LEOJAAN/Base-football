@@ -232,7 +232,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       transition: { duration: 0.3 }
     },
     running: { 
-      top: '75%', 
+      top: '80%', 
       left: '45%', 
       scale: 1,
       rotate: 0,
@@ -243,7 +243,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       }
     },
     kicking: { 
-      top: '75%',
+      top: '80%',
       left: '45%',
       scale: 1,
       rotate: 0,
@@ -253,7 +253,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     exit: {
       opacity: 0,
       scale: 1,
-      top: '75%',
+      top: '80%',
       left: '45%',
       transition: { duration: 0.4 }
     }
@@ -278,7 +278,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   };
 
   const ballVariants: Variants = {
-    center: { top: '80%', left: '50%', scale: 1, rotate: 0 },
+    center: { top: '88%', left: '50%', scale: 1, rotate: 0 },
     left: { 
       top: '25%', 
       left: '40%', 
