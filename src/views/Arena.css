@@ -296,10 +296,10 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 36% !important; /* Pushes the frame to the far end boundary of the grass */
+    top: 26% !important; /* Adjusted to match blue lines */
     transform: translateX(-50%) !important;
-    width: 360px !important; /* Scaled down for perfect far-perspective distance */
-    height: 150px !important;
+    width: 600px !important; /* Increased width */
+    height: 280px !important; /* Increased height */
     z-index: 2 !important; /* Explicitly behind the keeper and player layers */
     border: 5px solid #ffffff !important;
     border-bottom: none !important;
