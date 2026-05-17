@@ -380,7 +380,8 @@
 .striker-foreground {
   position: absolute;
   left: 35%; /* Fixes Flexbox default centering glitch before Framer Motion mounts */
-  transform: translateX(-50%);
+  top: 58%; /* Match new idle perspective position */
+  transform: translateX(-50%) scale(1.0);
   width: 140px;
   height: 220px;
   z-index: 20;

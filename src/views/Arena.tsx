@@ -224,9 +224,9 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   const strikerVariants: Variants = {
     idle: { 
-      top: '65%',
+      top: '58%',
       left: '35%', 
-      scale: 1.1, 
+      scale: 1.0, 
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.3 }
