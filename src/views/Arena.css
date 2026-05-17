@@ -296,15 +296,15 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 36% !important; /* Pushes the goal post frame exactly to the far grass horizon line */
+    top: 36% !important; /* Pushes the frame to the far end boundary of the grass */
     transform: translateX(-50%) !important;
-    width: 380px !important; /* Scaled down perfectly to match the far distance layout */
-    height: 160px !important; /* Proportional far-perspective height */
-    z-index: 2 !important; /* Placed perfectly behind the keeper and player overlay */
+    width: 360px !important; /* Scaled down for perfect far-perspective distance */
+    height: 150px !important;
+    z-index: 2 !important; /* Explicitly behind the keeper and player layers */
     border: 5px solid #ffffff !important;
     border-bottom: none !important;
     background: rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     border-radius: 4px;
 }
 
@@ -368,11 +368,11 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 41% !important; /* Aligns the keeper's feet on the pitch inside the far goal frame */
+    top: 41% !important; /* Positions keeper's feet correctly on the pitch inside the far goal */
     transform: translateX(-50%) !important;
-    width: 60px !important; /* Rescaled to match the smaller background goal ratio */
-    height: 95px !important;
-    z-index: 3 !important; /* Above the net grid, but perfectly behind the striker */
+    width: 55px !important; /* Downscaled ratio to match the background goal post size */
+    height: 85px !important;
+    z-index: 3 !important; /* Sits over the goal net background, but behind the striker */
 }
 
 
