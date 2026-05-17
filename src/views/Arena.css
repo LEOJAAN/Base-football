@@ -379,8 +379,6 @@
 /* Striker (Foreground View) */
 .striker-foreground {
   position: absolute;
-  bottom: 0px;
-  left: 50%;
   transform: translateX(-50%);
   width: 140px;
   height: 220px;
@@ -394,6 +392,7 @@
   width: 35px;
   height: 35px;
   z-index: 15;
+  transform: translateX(-50%);
 }
 
 .striker-character {

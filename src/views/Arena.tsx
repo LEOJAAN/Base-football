@@ -224,17 +224,17 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   const strikerVariants: Variants = {
     idle: { 
-      y: 0, 
-      x: '-120%', 
+      bottom: '5%',
+      left: '20%', 
       scale: 1.1, 
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.3 }
     },
     running: { 
-      y: -100, 
-      x: '-60%', 
-      scale: 0.8,
+      bottom: '18%', 
+      left: '46%', 
+      scale: 0.85,
       rotate: 0,
       opacity: 1,
       transition: { 
@@ -243,17 +243,18 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       }
     },
     kicking: { 
-      y: -100,
-      x: '-60%',
-      scale: 0.8,
+      bottom: '18%',
+      left: '46%',
+      scale: 0.85,
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.1 } 
     },
     exit: {
       opacity: 0,
-      scale: 0.8,
-      y: -100,
+      scale: 0.85,
+      bottom: '18%',
+      left: '46%',
       transition: { duration: 0.4 }
     }
   };
