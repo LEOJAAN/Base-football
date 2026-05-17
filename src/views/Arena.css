@@ -296,15 +296,15 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 26% !important; /* Adjusted to match blue lines */
+    top: 25% !important; /* Forces the frame to align right on the far pitch boundary */
     transform: translateX(-50%) !important;
-    width: 600px !important; /* Increased width */
-    height: 280px !important; /* Increased height */
-    z-index: 2 !important; /* Explicitly behind the keeper and player layers */
-    border: 5px solid #ffffff !important;
+    width: 350px !important; /* Scaled down accurately for background distance perspective */
+    height: 140px !important;
+    z-index: 1 !important; /* Must sit completely behind the keeper and striker layers */
+    border: 4px solid #ffffff !important;
     border-bottom: none !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.03) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     border-radius: 4px;
 }
 
@@ -368,11 +368,11 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 41% !important; /* Positions keeper's feet correctly on the pitch inside the far goal */
+    top: 28% !important; /* Positions keeper beautifully inside the far background frame */
     transform: translateX(-50%) !important;
-    width: 55px !important; /* Downscaled ratio to match the background goal post size */
-    height: 85px !important;
-    z-index: 3 !important; /* Sits over the goal net background, but behind the striker */
+    width: 50px !important; /* Downscaled properly to maintain correct depth ratio */
+    height: 80px !important;
+    z-index: 3 !important; /* Above the goal net, but fully behind the main foreground striker */
 }
 
 
