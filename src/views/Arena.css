@@ -296,14 +296,18 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 16.5% !important;
-    transform: translate(-50%, 0) !important;
-    width: 25% !important;
-    max-width: 25% !important;
-    height: auto !important;
-    z-index: 1 !important;
+    top: 15% !important;
+    transform: translateX(-50%) !important;
+    width: 320px !important;
+    height: 140px !important;
+    z-index: 3 !important;
     transform-style: preserve-3d;
     perspective: 1500px;
+    border: 6px solid #ffffff !important;
+    border-bottom: none !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
 }
 
 .goal-frame {
@@ -317,12 +321,9 @@
 .goal-back {
   position: absolute;
   inset: 0;
-  border: 18px solid #fff;
-  border-bottom: none;
-  background: rgba(255, 255, 255, 0.01);
+  border: none;
+  background: transparent;
   z-index: 10;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  border-radius: 4px;
 }
 
 /* Clear Ground Contact */
@@ -870,6 +871,7 @@
   transform-origin: center;
   background: none !important;
   box-shadow: none !important;
+  z-index: 8 !important;
 }
 
 /* Net Shaking Animation */
