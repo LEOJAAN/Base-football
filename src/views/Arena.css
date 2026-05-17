@@ -368,11 +368,11 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 18% !important; /* Moved down to touch the green turf */
+    top: 42% !important; /* Moved forward onto the grass where marked */
     transform: translateX(-50%) !important;
-    width: 32px !important; /* Scaled down */
-    height: 60px !important;
-    z-index: 3 !important; /* Above the goal net, but fully behind the main foreground striker */
+    width: 60px !important; /* Scaled up as they are closer to the camera */
+    height: 100px !important;
+    z-index: 5 !important; /* Above the pitch surface */
 }
 
 
