@@ -296,13 +296,11 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 36% !important;
+    top: 42% !important;
     transform: translateX(-50%) !important;
-    width: 320px !important;
-    height: 140px !important;
+    width: 400px !important;
+    height: 180px !important;
     z-index: 3 !important;
-    transform-style: preserve-3d;
-    perspective: 1500px;
     border: 6px solid #ffffff !important;
     border-bottom: none !important;
     background: rgba(255, 255, 255, 0.05) !important;
@@ -457,7 +455,7 @@
 /* Keeper Styling */
 .keeper {
   position: absolute;
-  top: 48% !important; /* Perfectly re-aligned with the lowered goal base */
+  top: calc(42% + 125px) !important; /* Perfectly re-aligned with the lowered goal base: top (42%) + goal_height (180px) - keeper_height (55px) */
   left: 50%;
   width: 32px;
   height: 55px;
