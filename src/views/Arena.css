@@ -390,10 +390,13 @@
 
 .ball {
   position: absolute;
-  width: 35px;
-  height: 35px;
+  width: 55px;
+  height: 55px;
   z-index: 30 !important; /* Ensures the ball is always visible and never hidden behind the striker */
   transform: translateX(-50%);
+  transform-origin: center;
+  background: none !important;
+  box-shadow: none !important;
 }
 
 .striker-character {
@@ -860,15 +863,7 @@
   height: 100%;
 }
 
-.ball {
-  width: 55px;
-  height: 55px;
-  position: absolute;
-  transform-origin: center;
-  background: none !important;
-  box-shadow: none !important;
-  z-index: 8 !important;
-}
+
 
 /* Net Shaking Animation */
 .net-shaking .net {
