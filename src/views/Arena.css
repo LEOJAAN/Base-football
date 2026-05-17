@@ -296,16 +296,16 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 42% !important;
+    top: 32% !important; /* Positions the base right on the pitch layout */
     transform: translateX(-50%) !important;
-    width: 400px !important;
-    height: 180px !important;
-    z-index: 3 !important;
-    border: 6px solid #ffffff !important;
+    width: 600px !important; /* Wide enough to match the marked area */
+    height: 260px !important; /* Scaled up height for proper penalty box ratio */
+    z-index: 2 !important; /* Stays securely behind the player and ball */
+    border: 7px solid #ffffff !important;
     border-bottom: none !important;
     background: rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
 }
 
 .goal-frame {
@@ -366,13 +366,13 @@
 
 /* Keeper */
 .keeper {
-  position: absolute;
-  top: 42%; /* Adjusted for new goal position */
-  left: 50%;
-  width: 65px;
-  height: 105px;
-  z-index: 6;
-  filter: drop-shadow(0 30px 15px rgba(0,0,0,0.6));
+    position: absolute !important;
+    left: 50% !important;
+    top: 45% !important; /* Centered relative to the pitch/goal depth */
+    transform: translateX(-50%) !important;
+    width: 90px !important; /* Restored normal, viewable size */
+    height: 140px !important;
+    z-index: 4 !important; /* Must sit in front of the goal net, but behind the striker */
 }
 
 
@@ -452,16 +452,7 @@
   transform: scaleY(0.9);
 }
 
-/* Keeper Styling */
-.keeper {
-  position: absolute;
-  top: calc(42% + 125px) !important; /* Perfectly re-aligned with the lowered goal base: top (42%) + goal_height (180px) - keeper_height (55px) */
-  left: 50%;
-  width: 32px;
-  height: 55px;
-  z-index: 5;
-  filter: drop-shadow(0 8px 4px rgba(0,0,0,0.5));
-}
+
 
 .keeper-character {
   width: 100%;
