@@ -296,10 +296,10 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 25% !important; /* Forces the frame to align right on the far pitch boundary */
+    top: 21% !important; /* Pushed further back */
     transform: translateX(-50%) !important;
-    width: 350px !important; /* Scaled down accurately for background distance perspective */
-    height: 140px !important;
+    width: 330px !important; /* Scaled down for distance */
+    height: 130px !important;
     z-index: 1 !important; /* Must sit completely behind the keeper and striker layers */
     border: 4px solid #ffffff !important;
     border-bottom: none !important;
@@ -368,10 +368,10 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 28% !important; /* Positions keeper beautifully inside the far background frame */
+    top: 24% !important; /* Adjusted to match new goalpost depth */
     transform: translateX(-50%) !important;
-    width: 50px !important; /* Downscaled properly to maintain correct depth ratio */
-    height: 80px !important;
+    width: 45px !important; /* Scaled down */
+    height: 75px !important;
     z-index: 3 !important; /* Above the goal net, but fully behind the main foreground striker */
 }
 
