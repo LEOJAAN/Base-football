@@ -379,6 +379,7 @@
 /* Striker (Foreground View) */
 .striker-foreground {
   position: absolute;
+  left: 35%; /* Fixes Flexbox default centering glitch before Framer Motion mounts */
   transform: translateX(-50%);
   width: 140px;
   height: 220px;
@@ -391,7 +392,7 @@
   position: absolute;
   width: 35px;
   height: 35px;
-  z-index: 15;
+  z-index: 30 !important; /* Ensures the ball is always visible and never hidden behind the striker */
   transform: translateX(-50%);
 }
 
