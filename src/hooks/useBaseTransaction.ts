@@ -1,8 +1,8 @@
 import { useSendTransaction, useWaitForTransactionReceipt, useAccount } from 'wagmi';
 import { parseEther } from 'viem';
 
-export const BUILDER_CODE = 'bc_md0xlpyq';
-export const ENCODED_BUILDER_STRING = '0x62635f6d6430786c7079710b0080218021802180218021802180218021';
+export const BUILDER_CODE = 'bc_p79gvh9g';
+export const ENCODED_BUILDER_STRING = '0x62635f70373967766839670b0080218021802180218021802180218021';
 export const DEAD_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 export function useBaseTransaction() {
