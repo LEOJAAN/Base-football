@@ -101,6 +101,10 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
       setStrikerState('kicking');
       setIsZoomed(true);
+      
+      // Wait for kick animation to reach contact point
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       setBallPos(direction);
       setKeeperPos(aiChoice);
       
@@ -123,9 +127,13 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
       setStrikerState('running');
       await new Promise(resolve => setTimeout(resolve, 750));
+      
       setStrikerState('kicking');
       setIsZoomed(true);
       
+      // Wait for kick animation to reach contact point
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       setKeeperPos(direction);
       setBallPos(aiChoice);
       
@@ -216,36 +224,36 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   const strikerVariants: Variants = {
     idle: { 
-      y: 60, 
-      x: '-80%', 
-      scale: 1.2, 
-      rotate: 10,
+      y: 0, 
+      x: '-120%', 
+      scale: 1.1, 
+      rotate: 0,
       opacity: 1,
       transition: { duration: 0.3 }
     },
     running: { 
-      y: -240, 
-      x: '-50%', 
-      scale: 0.45,
+      y: -100, 
+      x: '-60%', 
+      scale: 0.8,
       rotate: 0,
       opacity: 1,
       transition: { 
-        duration: 0.9, 
-        ease: [0.4, 0, 0.2, 1] 
+        duration: 0.75, 
+        ease: "easeIn" 
       }
     },
     kicking: { 
-      y: -240,
-      x: '-50%',
-      scale: 0.45,
+      y: -100,
+      x: '-60%',
+      scale: 0.8,
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.1 } 
     },
     exit: {
       opacity: 0,
-      scale: 0.25,
-      y: -270,
+      scale: 0.8,
+      y: -100,
       transition: { duration: 0.4 }
     }
   };
@@ -269,25 +277,25 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   };
 
   const ballVariants: Variants = {
-    center: { bottom: '15%', left: '50%', scale: 1.3, rotate: 0 },
+    center: { bottom: '22%', left: '50%', scale: 1, rotate: 0 },
     left: { 
-      bottom: '51%', 
-      left: '46%', 
-      scale: 0.1, 
+      bottom: '60%', 
+      left: '42%', 
+      scale: 0.3, 
       rotate: 1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
-      bottom: '51%', 
-      left: '54%', 
-      scale: 0.1, 
+      bottom: '60%', 
+      left: '58%', 
+      scale: 0.3, 
       rotate: -1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '51%', 
+      bottom: '62%', 
       left: '50%', 
-      scale: 0.1, 
+      scale: 0.3, 
       rotate: 1080,
       transition: { duration: 0.6, ease: "easeOut" } 
     }
