@@ -224,15 +224,15 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
 
   const strikerVariants: Variants = {
     idle: { 
-      bottom: '5%',
-      left: '20%', 
+      top: '80%',
+      left: '35%', 
       scale: 1.1, 
       rotate: 0,
       opacity: 1,
       transition: { duration: 0.3 }
     },
     running: { 
-      bottom: '18%', 
+      top: '65%', 
       left: '46%', 
       scale: 0.85,
       rotate: 0,
@@ -243,7 +243,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
       }
     },
     kicking: { 
-      bottom: '18%',
+      top: '65%',
       left: '46%',
       scale: 0.85,
       rotate: 0,
@@ -253,7 +253,7 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
     exit: {
       opacity: 0,
       scale: 0.85,
-      bottom: '18%',
+      top: '65%',
       left: '46%',
       transition: { duration: 0.4 }
     }
@@ -278,23 +278,23 @@ export function Arena({ selectedTeam, username, onRestart }: ArenaProps) {
   };
 
   const ballVariants: Variants = {
-    center: { bottom: '22%', left: '50%', scale: 1, rotate: 0 },
+    center: { top: '68%', left: '50%', scale: 1, rotate: 0 },
     left: { 
-      bottom: '60%', 
+      top: '40%', 
       left: '42%', 
       scale: 0.3, 
       rotate: 1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     right: { 
-      bottom: '60%', 
+      top: '40%', 
       left: '58%', 
       scale: 0.3, 
       rotate: -1440,
       transition: { duration: 0.6, ease: "easeOut" } 
     },
     'center-goal': { 
-      bottom: '62%', 
+      top: '38%', 
       left: '50%', 
       scale: 0.3, 
       rotate: 1080,
