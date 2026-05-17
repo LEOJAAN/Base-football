@@ -296,15 +296,15 @@
 .goal-post {
     position: absolute !important;
     left: 50% !important;
-    top: 24% !important; /* Adjusted perfectly so the top bar is completely visible below the marquee */
+    top: 36% !important; /* Pushes the goal post frame exactly to the far grass horizon line */
     transform: translateX(-50%) !important;
-    width: 580px !important;
-    height: 220px !important; /* Slightly reduced height to fit the pitch horizon vertically */
-    z-index: 2 !important; /* Ensures it stays behind keeper/player but above pitch background */
-    border: 6px solid #ffffff !important;
+    width: 380px !important; /* Scaled down perfectly to match the far distance layout */
+    height: 160px !important; /* Proportional far-perspective height */
+    z-index: 2 !important; /* Placed perfectly behind the keeper and player overlay */
+    border: 5px solid #ffffff !important;
     border-bottom: none !important;
     background: rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     border-radius: 4px;
 }
 
@@ -368,11 +368,11 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 32% !important; /* Aligns keeper beautifully inside the updated frame */
+    top: 41% !important; /* Aligns the keeper's feet on the pitch inside the far goal frame */
     transform: translateX(-50%) !important;
-    width: 85px !important;
-    height: 130px !important;
-    z-index: 4 !important;
+    width: 60px !important; /* Rescaled to match the smaller background goal ratio */
+    height: 95px !important;
+    z-index: 3 !important; /* Above the net grid, but perfectly behind the striker */
 }
 
 
