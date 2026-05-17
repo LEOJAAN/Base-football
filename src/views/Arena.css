@@ -368,7 +368,7 @@
 .keeper {
     position: absolute !important;
     left: 50% !important;
-    top: 13% !important; /* Adjusted to match new goalpost depth */
+    top: 18% !important; /* Moved down to touch the green turf */
     transform: translateX(-50%) !important;
     width: 32px !important; /* Scaled down */
     height: 60px !important;
